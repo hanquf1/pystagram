@@ -1,0 +1,43 @@
+{%load my_tags%}
+{% load bootstrap3 %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ photo.pk }}번 사진 게시물</title>
+    </head>
+
+    <body>
+        {% addnim%}
+        작성자: {{photo.user}}
+        접속자: {{request.user}}
+        {%end_add_nim%}
+
+        <form method="POST" action="/photos/delete/{{photo.id}}/">
+        {% csrf_token %}
+            <button type="submit" value="photo.pk" name="pk">삭제</button>
+        </form>
+        <p>
+        <img src="{{ photo.image.url }}" />
+        </p>
+
+        <p>
+            <a href="{% url 'photos:like_photo' pk=photo.pk %}">
+              {% if photo|did_like:request.user %}
+                좋아요 취소
+              {% else %}
+                좋아요
+              {% endif %} 
+            </a>
+        </p>
+
+        
+        <div>
+            {{ photo.content }}
+        </div>
+        <p>
+        {% with comments=photo.comment_set.all photo_id=photo.id %}
+            {% include 'list_comments.html'%}
+        {% endwith %}
+
+    </body>
+</html>

@@ -1,0 +1,40 @@
+{% load static from staticfiles %}
+{% load bootstrap3 %}
+<!DOCTYPE html>
+<!-- photos/templates/toppage.html -->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>첫 화면</title>
+
+        <!-- <script src="{% static 'hello.js' %}"></script> -->
+    </head>
+
+    <body class="container">
+        <form method="POST" action="/photos/create/" enctype="multipart/form-data">
+        {% csrf_token %}
+<!--         {{form.as_p}}
+        <input type="submit"/> -->
+            <input name="image" type="file"/>
+            <input name="content" type="text"/>
+            <button type="submit">등록</button>
+        </form>
+        {% for photo in object_list %}
+
+        <div class="photo_container">
+            <p>
+                <a href="{% url 'photos:view_photo' pk=photo.pk %}">
+                    <img src="{{ photo.image.url }}" height="200px"/>
+                </a>
+            </p>
+
+            <p>{{ photo.content }}</p>
+        
+        </div>
+
+        {% empty %}
+        <p>게시물이 없네요</p>
+        {% endfor %}
+
+    </body>
+</html>

@@ -1,0 +1,39 @@
+{% load bootstrap3 %}
+<form method="POST" action="/photos/add/comment/" class="form-horizontal">
+  {% csrf_token %}
+  <div class="comments_container">
+    {% for comment in comments %}
+    <div class="comment_comtainer">
+      <div class="row">
+        <div class="comment_content col-md-5"> 
+          팁: {{comment.content}}
+          <br><span>작성일시: </span>{{comment.created_at}}
+        </div>
+        <div class="col-md-1">
+          <button class="btn btn-danger " name="comment_id" formaction="/photos/delete/comment/" value="{{comment.id}}"type="submit">삭제</button>
+        </div>       
+        <br>
+      </div>
+
+    </div>
+    {%empty%}
+      <p>댓글이 없습니다.</p>
+    {%endfor%}
+    <br>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="input-group">
+          <input type="hidden" name="photo_id" value="{{photo_id}}"/>
+          <input type="text" class="form-control" name="content"/>
+          <span class="input-group-btn">
+            <button class="btn btn-primary" type="submit">댓글</button>
+          </span>
+        </div>
+      </div>          
+    </div>
+    <br>
+    <div text-alin>
+      <a href="/photos" class="btn btn-primary " role="button">목록</a>
+    </div>
+  </div>
+</form>
