@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'pystagram.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'testdb',
         'HOST': 'hansweb.csoghs5iwpk2.ap-northeast-1.rds.amazonaws.com:3306',
         'USER':'hans',
