@@ -87,8 +87,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'testdb',
         'HOST': 'hansweb.csoghs5iwpk2.ap-northeast-1.rds.amazonaws.com:3306',
-        'USER':'hans'
-        'PASSWORD':os.environ.get('PYSTAGRAM_DB_PW')
+        'USER':'hans',
+        'PASSWORD':os.environ.get('PYSTAGRAM_DB_PW'),
     }
 }
 
